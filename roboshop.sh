@@ -14,9 +14,10 @@ do
     --instance-type t3.micro \
     --security-group-ids sg-0a225eb0390204f30 \
     --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=$instance}]' \
+    --query 'Instances[0].InstanceId' \
     --output text)
 
-    if [ $instance -ne "frontend"] 
+    if [ $instance -ne "frontend" ] 
     then
         IP=aws ec2 describe-instances \
         --instance-ids $INSTANCE_ID \
