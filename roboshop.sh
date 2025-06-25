@@ -20,4 +20,26 @@ do
         
 echo "$instance IP Address is: $IP"
 
+aws route53 change-resource-record-sets \
+{
+  "Comment": "Creating or Updating A record for example.mydomain.com",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "'$instance'.'$DOMAIN_NAME'",
+        "Type": "A",
+        "TTL": 1,
+        "ResourceRecords": [
+          {
+            "Value": "'$IP'"
+          }
+        ]
+      }
+    }
+  ]
+}
+
+
+
 done
