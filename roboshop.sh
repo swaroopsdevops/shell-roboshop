@@ -21,6 +21,8 @@ do
 echo "$instance IP Address is: $IP"
 
 aws route53 change-resource-record-sets \
+--hosted-zone-id $ZONE_ID \
+--change-batch '
 {
   "Comment": "Creating or Updating A record for example.mydomain.com",
   "Changes": [{
@@ -36,6 +38,6 @@ aws route53 change-resource-record-sets \
           }]
     }
       }]
-}
+}'
 
 done
